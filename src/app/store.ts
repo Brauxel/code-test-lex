@@ -6,11 +6,13 @@ import {
   PreloadedState,
 } from "@reduxjs/toolkit";
 import counterReducer from "../features/counter/counterSlice";
+import { cinemaWorldAPI } from "../services/cinemaWorld/cinemaWorld";
 import { pokemonApi } from "../services/pokemon/pokemon";
 
 const rootReducer = combineReducers({
   counter: counterReducer,
-  [pokemonApi.reducerPath]: pokemonApi.reducer,
+  [cinemaWorldAPI.reducerPath]: cinemaWorldAPI.reducer,
+  // [pokemonApi.reducerPath]: pokemonApi.reducer,
 });
 
 // export const store = configureStore({
@@ -22,7 +24,10 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(pokemonApi.middleware),
+      getDefaultMiddleware().concat(
+        cinemaWorldAPI.middleware
+        // pokemonApi.middleware
+      ),
     preloadedState,
   });
 };
