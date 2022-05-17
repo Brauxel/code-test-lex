@@ -3,7 +3,6 @@ import {
   ThunkAction,
   Action,
   combineReducers,
-  getDefaultMiddleware,
   PreloadedState,
 } from "@reduxjs/toolkit";
 import counterReducer from "../features/counter/counterSlice";
@@ -14,10 +13,10 @@ const rootReducer = combineReducers({
   [pokemonApi.reducerPath]: pokemonApi.reducer,
 });
 
-export const store = configureStore({
-  reducer: rootReducer,
-  // adding the api middleware enables caching, invalidation, polling and other features of `rtk-query`
-});
+// export const store = configureStore({
+//   reducer: rootReducer,
+//   // adding the api middleware enables caching, invalidation, polling and other features of `rtk-query`
+// });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
@@ -28,11 +27,15 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   });
 };
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
+// export type AppDispatch = typeof store.dispatch;
+// export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,
   unknown,
   Action<string>
 >;
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore["dispatch"];
