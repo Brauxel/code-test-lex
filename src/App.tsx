@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MoviesListing } from "./components/pages/MoviesListing";
 import { NotFoundPage } from "./components/pages/NotFoundPage";
+import { PokemonListing } from "./components/pages/PokemonListing";
 import ReactAppExample from "./components/pages/ReactAppExample";
 
 export const App = () => {
@@ -8,6 +9,7 @@ export const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MoviesListing />} />
+        <Route path="/pokemon" element={<PokemonListing />} />
         <Route path="/react-example" element={<ReactAppExample />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
